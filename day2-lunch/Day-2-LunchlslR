@@ -1,0 +1,28 @@
+total 9534600
+-rw-r--r--  1 cmdb  staff           0 Aug 27 13:44 Day-2-Lunch
+-rw-r--r--  1 cmdb  staff           0 Aug 27 13:44 Day-2-LunchlslR
+-rwxr-xr-x@ 1 cmdb  staff        1698 Aug 27 13:05 README.md
+-rwxr-xr-x@ 1 cmdb  staff         454 Aug 27 13:39 RNA-seq.sh
+-rw-r--r--  1 cmdb  staff      443422 Aug 27 12:40 SRR072893.10k.bam
+-rw-r--r--  1 cmdb  staff      132360 Aug 27 12:41 SRR072893.10k.bam.bai
+-rw-r--r--  1 cmdb  staff     1991262 Aug 27 11:42 SRR072893.10k.fastq
+-rw-r--r--  1 cmdb  staff     1821722 Aug 27 12:25 SRR072893.10k.sam
+-rw-r--r--  1 cmdb  staff    31572053 Aug 27 12:58 SRR072893.10k.sortedindex.gtf
+-rw-r--r--  1 cmdb  staff      610311 Aug 27 12:03 SRR072893.10k_fastqc.html
+-rw-r--r--  1 cmdb  staff      431319 Aug 27 12:03 SRR072893.10k_fastqc.zip
+-rw-r--r--  1 cmdb  staff    35768953 Aug 27 13:40 SRR072893.bam
+-rw-r--r--  1 cmdb  staff      131544 Aug 27 13:40 SRR072893.bam.bai
+-r--r--r--  1 cmdb  staff  4582672018 Aug 27 13:39 SRR072893.fastq
+-rw-r--r--  1 cmdb  staff   194113536 Aug 27 13:40 SRR072893.sam
+-rw-r--r--  1 cmdb  staff      627558 Aug 27 13:40 SRR072893_fastqc.html
+-rw-r--r--  1 cmdb  staff      511890 Aug 27 13:40 SRR072893_fastqc.zip
+-rw-r--r--  1 cmdb  staff     2154166 Aug 27 12:58 e2t.ctab
+-rw-r--r--  1 cmdb  staff     5414339 Aug 27 12:58 e_data.ctab
+-rw-r--r--  1 cmdb  staff     1745148 Aug 27 12:58 i2t.ctab
+-rw-r--r--  1 cmdb  staff     2213702 Aug 27 12:58 i_data.ctab
+-rw-r--r--  1 cmdb  staff     2902447 Aug 27 12:58 t_data.ctab
+drwx------  3 cmdb  staff          96 Aug 27 13:40 tmp.m6blROVG
+
+./tmp.m6blROVG:
+total 0
+-rw-r--r--  1 cmdb  staff  0 Aug 27 13:40 SRR072893.gtf.tmp
