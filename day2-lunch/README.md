@@ -25,3 +25,6 @@ samtools index -b SRR072893.10k.bam
                    #these are not kept unless there is strong evidence for them
   #-l <label>       name prefix for output transcripts (default: MSTRG)
 stringtie SRR072893.10k.bam -G ../genome/BDGP6.Ensembl.81.gtf -e -B -p 4 -o SRR072893.10k.sortedindex.gtf
+
+git add SRR072893.10k.fastq SRR072893.10k.sam SRR072893.10k.bam SRR072893.10k.sortedindex.gtf
+
