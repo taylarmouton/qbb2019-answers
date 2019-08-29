@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-"""Usage: ./00-scatter.py <ctab>
+"""Usage: ./00-scatter.py <ctab1> <ctab2>
 
-Compare num_exons vs length
+Compare FPKM1 vs FPKM2
 """
 
 import sys
