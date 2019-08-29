@@ -30,6 +30,7 @@ list_ =[]
 #For statement to check query kmer to stored target kmer
 
 for ident2, sequence in query:
+#Ensuring that when the alignment is moved up one in the scan it doesn't treat the new read as 
     ignore = set()
     sequence = sequence.upper()
     j = 0 
@@ -37,17 +38,23 @@ for ident2, sequence in query:
         kmerquery = sequence[j:j+k]
         if kmerquery not in kmer_of_target:
             continue
+#Making what's being called compatiable with the tuple it's stored in the dictionary
         else:
             list_of_dupes = kmer_of_target[kmerquery]
             for ident, i in list_of_dupes:
+#Loop arguement that exeutes the command to not treat the scan as a new read
                 if (ident,i) in ignore:
                     continue
+#X represents the count of the initial query start point plus one for each scan
                 x = j + 1
                 last_start = i
                 match_len = k
+#Setting variable for each file as being read plus one k or character
                 end = i+k-1
                 end2 = x+k-1
+#Specifies the sequence we're looking at 
                 seq = kmerquery
+#Loop that scans and counts the query by comparing it to the target to align
                 while x < len(sequence) - k  + 1:
                     next_kmer = sequence[x:x+k]
                     if next_kmer in kmer_of_target:
@@ -68,10 +75,11 @@ for ident2, sequence in query:
                     else:
                         break
                     x += 1
+#Making sure each scan when it matches is added to list made in line 28
                 # print(match_len)
                 list_.append((ident, i, j, match_len,seq))
 
-
+#Sorting from large to small; only prints the match length and sequence, need to add values for gene ID
 for ident,i,j,match_len,seq in sorted(list_, key= lambda t : t[3],reverse = True):
     print(match_len,seq)
 #                print(ident, i, j, kmerquery)
