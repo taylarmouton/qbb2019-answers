@@ -4,7 +4,7 @@
 
 Box plot all transcripts for a given gene name based off of sex
 
-
+If log data, then you'd have to convert y-axis to be the same to accurately interpret
 """
 
 import sys
