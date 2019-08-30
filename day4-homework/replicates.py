@@ -5,6 +5,7 @@ Usage: ./02-timecourse.py <t_name> <samples.csv> <FPKMs.>
 ./03-timecourse.py FBtr0331261 ~/qbb2019/data/samples.csv all.csv
 Create a time course of a given transcript for feamles and males
 
+Users/cmdb/qbb2019-answers/day4-homework $ ./replicates.py FBtr0331261 ~/qbb2019/data/samples.csv all.csv replicates.csv ../results/stringtie
 
 """
 
