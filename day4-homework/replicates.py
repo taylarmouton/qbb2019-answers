@@ -55,7 +55,7 @@ def sex_replicate(sex):
         df = pd.read_csv(ctab_path, sep="\t", 
                         index_col="t_name")
         # my_data["gene_name"] = df.loc[:,"gene_name"]
-        my_data.append(df.loc[t_name, "FPKM"])
+        my_data.append(df.loc[t_name, "FPKM"])#don't have to say FPKM, because know gene, could just have [t_name]
     return my_data
 
 #Print my_data
