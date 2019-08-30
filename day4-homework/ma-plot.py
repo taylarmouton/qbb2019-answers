@@ -30,7 +30,7 @@ fpkm = {name1 : ctab1.loc[:,"FPKM"],
         name2 : ctab2.loc[:,"FPKM"]}
 
 df = pd.DataFrame(fpkm)
-df += 1
+df += 1 #because log(0) doesn't work
 
 #print(df)
 #print(type(df))
