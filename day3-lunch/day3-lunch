@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+""""
+Binary search to locate mutations in BDGP6.Ensembl.81.gtf
+"""
+import sys
+
+chr_3R = []
+f = open(sys.argv[1])
+
+#opening out file from Exercise 1
+for i, line in enumerate f:
+    columns = line.rstrip("\n").split()
+    if line.startswith("#"):
+        continue
+    if "3R" in columns[0] and "gene" in columns[2] 'gene_biotype "protein_coding"' in line:
+        gene_start = columns[3]
+        gene_end = columns[4]
+        gene_name = columns[13]
+        chr_3R.extend([gene_start, gene_end, gene_name])
+print(chr_3R)
+        
+        
+ 
