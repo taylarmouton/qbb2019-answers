@@ -27,4 +27,4 @@ fpkms = {name1 : ctab1.loc[:,"FPKM"],
 df = pd.DataFrame(fpkm)
 
 print(df)
-print(type(df))
+print(type(df))cd
