@@ -16,8 +16,8 @@ for i, line in enumerate(f):
     if line.startswith("#"):
         continue
     if "3R" in columns[0] and "gene" in columns[2] and 'gene_biotype "protein_coding"' in line:
-        chr_3R.append( int( columns[3] ) )
-        chr_3R.append( int( columns[4] ) )
+        chr_3R.append(int(columns[3]))
+        chr_3R.append(int( columns[4]))
         gene_name = columns[13]
         chr_3R_dict[columns[3]] = gene_name
         chr_3R_dict[columns[4]] = gene_name
@@ -30,15 +30,16 @@ for i, line in enumerate(f):
 
 #search_chr = "3R"
 search_pos = 21378950
+sorted(chr_3R)
 lo = 0
-hi = len(chr_3R)-1
+hi = len(chr_3R) - 1
 mid = 0
 iteration = 0
 
 while hi > 1:
     hi = len(chr_3R) - 1
     iteration += 1
-    mid = int((hi+lo) / 2)
+    mid = int(hi / 2)
     if chr_3R[mid] == search_pos:
         gene_pos = chr_3R[mid]
         gene_name = chr_3R_dict[str(gene_pos)]
@@ -50,3 +51,4 @@ while hi > 1:
     else:
         # chr_3R[mid]
         break
+print(gene_name)
