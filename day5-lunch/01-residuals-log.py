@@ -41,8 +41,8 @@ ols_results = model.fit()
 
 #Plotting in Histogram the linear regression
 fig, ax = plt.subplots()
-ax.hist(ols_results.resid, bins=1000, range=(-100, 100))
-ax.set_xlim(-100, 100)
+ax.hist(ols_results.resid, bins=1000)
+#ax.set_xlim(-100, 100)
 plt.xlabel("Residual")
 plt.ylabel("Frequency")
 plt.title("FPKM and Histone Mod Residual")
