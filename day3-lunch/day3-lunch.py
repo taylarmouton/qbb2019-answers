@@ -43,7 +43,7 @@ while hi > 1:
     if chr_3R[mid] == search_pos:
         gene_pos = chr_3R[mid]
         gene_name = chr_3R_dict[str(gene_pos)]
-        print(gene_name, abs(chr_3R[mid] - search_pos), iteration)
+        print(gene_name, abs(chr_3R[mid][2] - search_pos), iteration)
     elif chr_3R[mid] > search_pos:
         chr_3R = chr_3R[:mid] 
     elif (search_pos > chr_3R[mid]):
