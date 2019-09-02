@@ -2,6 +2,10 @@
 
 """"
 Binary search to locate mutations in BDGP6.Ensembl.81.gtf
+
+/Users/cmdb/qbb2019-answers/day3-lunch $ git add day3-lunch.py day3-lunch.out 
+/Users/cmdb/qbb2019-answers/day3-lunch $ git add day3-lunch-distance.py day3-lunch-distance.out 
+
 """
 import sys
 
