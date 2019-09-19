@@ -1,0 +1,5 @@
+/Users/cmdb/qbb2019-answers/week-2 $ ./computecontigs spadesoutput/contigs.fasta 
+207 1737 389.2109375 372
+
+/Users/cmdb/qbb2019-answers/week-2 $ ./computecontigs contigs.fa 
+41 1333 215.22027972027973 290
