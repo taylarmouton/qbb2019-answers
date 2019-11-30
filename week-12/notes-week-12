@@ -1,0 +1,63 @@
+Bisulfite Sequencing
+
+T--> C high score but not C --> T: allowing T's to match C's in the reference genome but not the other way
+bizmar: creates additional reference where G's read as A's (the reverse strand) in addition to the given reference and chooses based off these two alignments picks the best one --> not great but proxy of amount of methylation (new refernce called converted)
+
+Data you get out
+Get porporiton of population that's methylated 
+Need depth of coverage because it's not consistent/variable in amount of methylation present 
+
+
+
+Downloading the File 
+
+**Made new enviroment called week-12 DNAmeth) which has bismark, igv, and sra-tools downloaded **
+
+****NO ENVIRO BC NO WANT DOWNLOAD FASTQ-DUMP)
+(base) /Users/cmdb/qbb2019-answers/week-12 $ fastq-dump -A SRR1035454 --split-files -X 1000000
+
+**Named them according to their data
+(base) /Users/cmdb/qbb2019-answers/week-12 $ mv SRR1035452_1.fastq EpiSC_mC_1.fastq
+
+**Looking at the data
+(base) /Users/cmdb/qbb2019-answers/week-12 $ open ES_f_mC_1_fastqc.html
+
+*.fa is sequence and fastq is reads 
+
+*Copying the file to new directory so have access 
+(base) /Users/cmdb/qbb2019-answers/week-12 $ cp ../week-9/chr19.fa ./
+
+*Creating index for mapping, uses bowtie the ./ indicates the file I want to be my index which is chr19.fa) 
+
+bismark_genome_preparation --bowtie2 ./
+
+*Mapping with bismark-- had to go back to enviroment created for bismark 
+
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ bismark --genome ./ -1 ES_f_mC_1.fastq -2 ES_f_mC_2.fastq 
+
+*BAM to SAM stuff
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ samtools view ES_f_mC_1_bismark_bt2_pe.bam ES_f_mC_1_bismark.sam
+[main_samview] random alignment retrieval only works for indexed BAM or CRAM files.
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ samtools view ES_f_mC_1_bismark_bt2_pe.bam > ES_f_mC_1_bismark.sam
+\(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $samtools view ES_f_mC_2_bismark_bt2_pe.bam ES_f_mC_2_bismark.sam
+[E::hts_open_format] Failed to open file ES_f_mC_2_bismark_bt2_pe.bam
+samtools view: failed to open "ES_f_mC_2_bismark_bt2_pe.bam" for reading: No such file or directory
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ samtools view EpiSC_mC_1_bismark_bt2_pe.bam > EpiSC_mC_1_bismark.sam
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ ls
+Bisulfite_Genome			EpiSC_mC_1.fastq
+ES_f_mC_1.fastq				EpiSC_mC_1_bismark.sam
+ES_f_mC_1_bismark.sam			EpiSC_mC_1_bismark_bt2_PE_report.txt
+ES_f_mC_1_bismark_bt2_PE_report.txt	EpiSC_mC_1_bismark_bt2_pe.bam
+ES_f_mC_1_bismark_bt2_pe.bam		EpiSC_mC_2.fastq
+ES_f_mC_1_fastqc.html			chr19.fa
+ES_f_mC_1_fastqc.zip			notes-week-12
+ES_f_mC_2.fastq
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ less -S EpiSC_mC_1_bismark.sam 
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ samtools sort ES_f_mC_1_bismark_bt2_pe.bam > ES_f_mC_1_bismark_bt2_sorted.bam
+(week-12_DNAmeth) /Users/cmdb/qbb2019-answers/week-12 $ samtools sort EpiSC_mC_1_bismark_bt2_pe.bam > EpiSC_mC_1_bismark_bt2_sorted.bam
+
+*Making index 
+samtools index for each sorted bam 
+
+*Meth extracgtion 
+$bismark_methylation_extractor --bedgraph --comprehensive ES_f_mC_1_bismark_bt2_pe.bam 
