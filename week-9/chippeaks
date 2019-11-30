@@ -1,0 +1,26 @@
+Starting getsize: getsize memechip_out/sortedERpeaks 1> $metrics
+getsize ran successfully in 0.015317 seconds
+Starting fasta-most: fasta-most -min 50 < memechip_out/sortedERpeaks 1> $metrics
+fasta-most ran successfully in 0.06503 seconds
+Starting fasta-center: fasta-center -dna -len 100 < memechip_out/sortedERpeaks 1> memechip_out/seqs-centered
+Content preceeds the sequences!
+fasta-center ran successfully in 0.075892 seconds
+Starting fasta-shuffle-letters: fasta-shuffle-letters memechip_out/seqs-centered memechip_out/seqs-shuffled -kmer 2 -tag -dinuc -dna -seed 1
+fasta-shuffle-letters ran successfully in 0.008104 seconds
+Starting fasta-get-markov: fasta-get-markov -nostatus -nosummary -dna -m 1 memechip_out/sortedERpeaks memechip_out/background
+fasta-get-markov ran successfully in 0.008493 seconds
+Starting meme: meme memechip_out/seqs-centered -oc memechip_out/meme_out -mod zoops -nmotifs 3 -minw 6 -maxw 30 -bfile memechip_out/background -dna -revcomp -nostatus
+No sequences found in file `memechip_out/seqs-centered'.  Check file format.
+meme exited with error code 1
+Starting dreme: dreme -verbosity 1 -oc memechip_out/dreme_out -png -dna -p memechip_out/seqs-centered -n memechip_out/seqs-shuffled
+  File "/Users/cmdb/miniconda3/bin/dreme", line 765
+    print "Finding secondary RE in left flank..."
+                                                ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print("Finding secondary RE in left flank...")?
+dreme exited with error code 1
+Starting centrimo: centrimo -seqlen 0 -verbosity 1 -oc memechip_out/centrimo_out -bfile memechip_out/background memechip_out/sortedERpeaks jaspar_core_2016.meme
+FATAL: Failed to read a single sequence from the given FASTA file.
+
+centrimo exited with error code 1
+Starting meme-chip_html_to_tsv: meme-chip_html_to_tsv memechip_out/meme-chip.html memechip_out/summary.tsv "meme-chip -db jaspar_core_2016.meme sortedERpeaks" 5.0.5 "Mon Mar 18 20\:12\:19 2019 -0700"
+meme-chip_html_to_tsv ran successfully in 0.123908 seconds
