@@ -1,0 +1,48 @@
+Clustering
+
+Cultured cells w/ treated vs untreated or difference in cell type
+	Looking at co-expression: reg by same factors, related functions, or function in same pathway
+	ID-ing 
+		Usually have heat map to start with for example-- hard to tell (noisy)
+		If you cluster can do so by gene or cekk type --> if combine can get blocks of gene expression to compare
+
+Hierarchical Agglomerative Clustering (super common--most heat maps incorporate a tree to show)
+	Each obs starts off as a leaf--> building up a tree from the bottom leaves to roots (STARTING FROM THE TOP [LEAVES] TO BOTTOM [ROOT])
+	Combines closest nodes (by similarity)
+
+	Quantifying Similarities 
+		Euclidian -- pythagorean theorem to find distance between two points
+		Manhattan/City Distance-- A+B (the actual points) --> will scale with euclidian 
+		Can also have squared euclidian-- emphasizing distance 
+			far farther 
+			close closer
+	Once know how measuring distance-- choosing points to compare
+		Avg of two pts and compare to the next one
+		Choose which ones to compare
+		Choose the maximum
+		Linkage-- which nodes to use for clustering distance 
+			Complete (Max)
+			Single(Min)
+			Average
+	Decisions to make
+		How to choose distance (Euclidian usually good)
+		How to choose linkage-- considering groups already combined (Avg usually good, but depends on data set)
+		
+K-means Clustering (also common but not usually visualized)
+	If each point a gene-- think two clusters have similar expression pattern
+	Pick two points in range of data (not neccesarily in the cluters)
+	Recalculate the points based on which point they're closer to
+	Take average from each point cluster-- make the points closest to center of new spread of clutering 
+	Recalculate the center-- updating assignments and centers until the posistions chosen become stable (center of mass-- starts off random)
+		Will be nosiy so we'll have to adjust after visualizing 
+
+Gene Ontology 
+	OVerrrepresentation-- am I seeing more of this term than what i'd expect in a population 
+	Fisher's Exact Test -- we're looking @ percentages 
+	Bonferroni Correction
+	
+Differiential Expression
+	Usually talked about log scale 
+	Log 50 -- good chance significant 
+	replicates and error bars are important, and absolute level of expression
+	Also consider noise-- if move data, magnitude of distance 
