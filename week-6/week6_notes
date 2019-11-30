@@ -1,0 +1,278 @@
+/Users/cmdb/qbb2019-answers/week-6 $ mv /Users/cmdb/Downloads/g1e.tar.xz .
+/Users/cmdb/qbb2019-answers/week-6 $ ls
+g1e.tar.xz
+#Unzipping
+/Users/cmdb/qbb2019-answers/week-6 $ tar -xf g1e.tar.xz 
+/Users/cmdb/qbb2019-answers/week-6 $ ls
+CTCF_ER4.fastq	CTCF_G1E.fastq	g1e.tar.xz	input_ER4.fastq	input_G1E.fastq
+/Users/cmdb/qbb2019-answers/week-6 $ wget http://hgdownload.soe.ucsc.edu/goldenPath/mm10/chromosomes/chr19.fa.gz
+--2019-10-11 14:35:21--  http://hgdownload.soe.ucsc.edu/goldenPath/mm10/chromosomes/chr19.fa.gz
+Resolving hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)... 128.114.119.163
+Connecting to hgdownload.soe.ucsc.edu (hgdownload.soe.ucsc.edu)|128.114.119.163|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 19139583 (18M) [application/x-gzip]
+Saving to: ‘chr19.fa.gz’
+
+chr19.fa.gz            100%[============================>]  18.25M  1.38MB/s    in 8.2s    
+
+2019-10-11 14:35:30 (2.23 MB/s) - ‘chr19.fa.gz’ saved [19139583/19139583]
+
+/Users/cmdb/qbb2019-answers/week-6 $ ls
+CTCF_ER4.fastq	chr19.fa.gz	input_ER4.fastq
+CTCF_G1E.fastq	g1e.tar.xz	input_G1E.fastq
+/Users/cmdb/qbb2019-answers/week-6 $ less -S chr19.fa.gz 
+"chr19.fa.gz" may be a binary file.  See it anyway? 
+/Users/cmdb/qbb2019-answers/week-6 $ less -S chr19.fa.gz 
+"chr19.fa.gz" may be a binary file.  See it anyway? 
+/Users/cmdb/qbb2019-answers/week-6 $ less -S
+Missing filename ("less --help" for help)
+/Users/cmdb/qbb2019-answers/week-6 $ ls
+CTCF_ER4.fastq	chr19.fa	g1e.tar.xz	input_G1E.fastq
+CTCF_G1E.fastq	chr19.fa.gz	input_ER4.fastq
+/Users/cmdb/qbb2019-answers/week-6 $ less -S chr19.fa
+#Making chr19 index 
+/Users/cmdb/qbb2019-answers/week-6 $ bowtie2-build chr19.fa reference 
+Settings:
+  Output files: "reference.*.bt2"
+  Line rate: 6 (line is 64 bytes)
+  Lines per side: 1 (side is 64 bytes)
+  Offset rate: 4 (one in 16)
+  FTable chars: 10
+  Strings: unpacked
+  Max bucket size: default
+  Max bucket size, sqrt multiplier: default
+  Max bucket size, len divisor: 4
+  Difference-cover sample period: 1024
+  Endianness: little
+  Actual local endianness: little
+  Sanity checking: disabled
+  Assertions: disabled
+  Random seed: 0
+  Sizeofs: void*:8, int:4, long:8, size_t:8
+Input files DNA, FASTA:
+  chr19.fa
+Building a SMALL index
+Reading reference sizes
+  Time reading reference sizes: 00:00:01
+Calculating joined length
+Writing header
+Reserving space for joined string
+Joining reference sequences
+  Time to join reference sequences: 00:00:00
+bmax according to bmaxDivN setting: 14551464
+Using parameters --bmax 10913598 --dcv 1024
+  Doing ahead-of-time memory usage test
+  Passed!  Constructing with these parameters: --bmax 10913598 --dcv 1024
+Constructing suffix-array element generator
+Building DifferenceCoverSample
+  Building sPrime
+  Building sPrimeOrder
+  V-Sorting samples
+  V-Sorting samples time: 00:00:01
+  Allocating rank array
+  Ranking v-sort output
+  Ranking v-sort output time: 00:00:00
+  Invoking Larsson-Sadakane on ranks
+  Invoking Larsson-Sadakane on ranks time: 00:00:00
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 5.82059e+07 (target: 10913597)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering Ebwt loop
+Getting block 1 of 1
+  No samples; assembling all-inclusive block
+  Sorting block of length 58205856 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:00:18
+Returning block of 58205857 for bucket 1
+Exited Ebwt loop
+fchr[A]: 0
+fchr[C]: 16732680
+fchr[G]: 29182023
+fchr[T]: 41602903
+fchr[$]: 58205856
+Exiting Ebwt::buildToDisk()
+Returning from initFromVector
+Wrote 23596491 bytes to primary EBWT file: reference.1.bt2
+Wrote 14551472 bytes to secondary EBWT file: reference.2.bt2
+Re-opening _in1 and _in2 as input streams
+Returning from Ebwt constructor
+Headers:
+    len: 58205856
+    bwtLen: 58205857
+    sz: 14551464
+    bwtSz: 14551465
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 20
+    eftabSz: 80
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 3637867
+    offsSz: 14551468
+    lineSz: 64
+    sideSz: 64
+    sideBwtSz: 48
+    sideBwtLen: 192
+    numSides: 303156
+    numLines: 303156
+    ebwtTotLen: 19401984
+    ebwtTotSz: 19401984
+    color: 0
+    reverse: 0
+Total time for call to driver() for forward index: 00:00:25
+Reading reference sizes
+  Time reading reference sizes: 00:00:00
+Calculating joined length
+Writing header
+Reserving space for joined string
+Joining reference sequences
+  Time to join reference sequences: 00:00:01
+  Time to reverse reference sequence: 00:00:00
+bmax according to bmaxDivN setting: 14551464
+Using parameters --bmax 10913598 --dcv 1024
+  Doing ahead-of-time memory usage test
+  Passed!  Constructing with these parameters: --bmax 10913598 --dcv 1024
+Constructing suffix-array element generator
+Building DifferenceCoverSample
+  Building sPrime
+  Building sPrimeOrder
+  V-Sorting samples
+  V-Sorting samples time: 00:00:00
+  Allocating rank array
+  Ranking v-sort output
+  Ranking v-sort output time: 00:00:01
+  Invoking Larsson-Sadakane on ranks
+  Invoking Larsson-Sadakane on ranks time: 00:00:00
+  Sanity-checking and returning
+Building samples
+Reserving space for 12 sample suffixes
+Generating random suffixes
+QSorting 12 sample offsets, eliminating duplicates
+QSorting sample offsets, eliminating duplicates time: 00:00:00
+Multikey QSorting 12 samples
+  (Using difference cover)
+  Multikey QSorting samples time: 00:00:00
+Calculating bucket sizes
+Splitting and merging
+  Splitting and merging time: 00:00:00
+Avg bucket size: 5.82059e+07 (target: 10913597)
+Converting suffix-array elements to index image
+Allocating ftab, absorbFtab
+Entering Ebwt loop
+Getting block 1 of 1
+  No samples; assembling all-inclusive block
+  Sorting block of length 58205856 for bucket 1
+  (Using difference cover)
+  Sorting block time: 00:00:18
+Returning block of 58205857 for bucket 1
+Exited Ebwt loop
+fchr[A]: 0
+fchr[C]: 16732680
+fchr[G]: 29182023
+fchr[T]: 41602903
+fchr[$]: 58205856
+Exiting Ebwt::buildToDisk()
+Returning from initFromVector
+Wrote 23596491 bytes to primary EBWT file: reference.rev.1.bt2
+Wrote 14551472 bytes to secondary EBWT file: reference.rev.2.bt2
+Re-opening _in1 and _in2 as input streams
+Returning from Ebwt constructor
+Headers:
+    len: 58205856
+    bwtLen: 58205857
+    sz: 14551464
+    bwtSz: 14551465
+    lineRate: 6
+    offRate: 4
+    offMask: 0xfffffff0
+    ftabChars: 10
+    eftabLen: 20
+    eftabSz: 80
+    ftabLen: 1048577
+    ftabSz: 4194308
+    offsLen: 3637867
+    offsSz: 14551468
+    lineSz: 64
+    sideSz: 64
+    sideBwtSz: 48
+    sideBwtLen: 192
+    numSides: 303156
+    numLines: 303156
+    ebwtTotLen: 19401984
+    ebwtTotSz: 19401984
+    color: 0
+    reverse: 1
+Total time for backward call to driver() for mirror index: 00:00:27
+/Users/cmdb/qbb2019-answers/week-6 $ ls
+CTCF_ER4.fastq		input_ER4.fastq		reference.4.bt2
+CTCF_G1E.fastq		input_G1E.fastq		reference.rev.1.bt2
+chr19.fa		reference.1.bt2		reference.rev.2.bt2
+chr19.fa.gz		reference.2.bt2
+g1e.tar.xz		reference.3.bt2
+#Aligning using bowtie2
+/Users/cmdb/qbb2019-answers/week-6 $ bowtie2 -x reference -U input_ER4.fastq -S inputER4.sam
+166130 reads; of these:
+  166130 (100.00%) were unpaired; of these:
+    3459 (2.08%) aligned 0 times
+    161719 (97.34%) aligned exactly 1 time
+    952 (0.57%) aligned >1 times
+97.92% overall alignment rate
+/Users/cmdb/qbb2019-answers/week-6 $ mate week6_notes
+/Users/cmdb/qbb2019-answers/week-6 $ 
+#For each file
+/Users/cmdb/qbb2019-answers/week-6 $ bowtie2 -x reference -U CTCF_G1E.fastq -S CTCFG1E.sam
+#converting from sam to bam
+/Users/cmdb/qbb2019-answers/week-6 $ samtools -sort -@ 4 inputER4.sam -o sortinputER4.bam
+#using macs2 in macs2 conda
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ macs2 callpeak -f BAM -t CTCFG1E..bam -c sortinputG1E.bam -g 62309240 --outdir callpeaks_output_G1E
+#copying files and reanming them
+/Users/cmdb/qbb2019-answers/week-6 $ cp ./callpeaks_output_ER4/NA_peaks.narrowPeak ./NA_peaks.narrowPeakER4
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ cp ./callpeaks_output_G1E/NA_peaks.narrowPeak ./NA_peaks.narrowPeakG1E
+#Finding where CTCF overlaps or doesn't: DIRECTIONALITY MATTERS FOR V COMMAND
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ bedtools intersect -v -a cutnarrowpeakER4.bed -b cutnarrowpeakG1E.bed > loss_binding_CTCF
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ bedtools intersect -v -a cutnarrowpeakG1E.bed -b cutnarrowpeakER4.bed > gain_binding_CTCF
+#Finding Feature Overlapping
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ mate countelements.py
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ windowBed -a NA_peaks.narrowPeakER4 -b Mus_musculus.GRCm38.94_features.bed -w 10 | bedtools overlap -i stdin -cols 2,3,8,9 | wc -l
+     520
+(macs2) /Users/cmdb/qbb2019-answers/week-6 $ windowBed -a NA_peaks.narrowPeakG1E -b Mus_musculus.GRCm38.94_features.bed -w 10 | bedtools overlap -i stdin -cols 2,3,8,9 | wc -l
+     455
+#RE-DO
+(base) /Users/cmdb/qbb2019-answers/week-6 $  bedtools intersect -a Mus_musculus.GRCm38.94_features.bed -b sortinputER4.bam > overlapER4 
+(base) /Users/cmdb/qbb2019-answers/week-6 $  bedtools intersect -a Mus_musculus.GRCm38.94_features.bed -b sortinputG1E.bam > overlapG1E 
+(base) /Users/cmdb/qbb2019-answers/week-6 $ ./countelements.py overlapER4 
+Traceback (most recent call last):
+  File "./countelements.py", line 16, in <module>
+    info = fields[13]
+IndexError: list index out of range
+(base) /Users/cmdb/qbb2019-answers/week-6 $ ./countelements.py overlapER4 
+Traceback (most recent call last):
+  File "./countelements.py", line 16, in <module>
+    info = fields[9]
+IndexError: list index out of range
+(base) /Users/cmdb/qbb2019-answers/week-6 $ less -S overlapER4 
+(base) /Users/cmdb/qbb2019-answers/week-6 $ ./countelements.py overlapER4 
+2831
+7713
+80076
+(base) /Users/cmdb/qbb2019-answers/week-6 $ less -S overlapER4 
+(base) /Users/cmdb/qbb2019-answers/week-6 $ ./countelements.py overlapG1E 
+4711
+13711
+134394
+
+
