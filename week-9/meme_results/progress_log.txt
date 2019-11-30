@@ -1,0 +1,54 @@
+Invoking:
+  getsize meme_results/sortedpeaks.fa 1> $metrics
+Finished invoke:
+  name: count_seqs  status: 0  time: 0.011808
+Invoking:
+  fasta-most -min 50 < meme_results/sortedpeaks.fa 1> $metrics
+Finished invoke:
+  name: most_seqs  status: 0  time: 0.062896
+Invoking:
+  fasta-center -dna -len 100 < meme_results/sortedpeaks.fa 1> meme_results/seqs-centered
+Finished invoke:
+  name: center_seqs  status: 0  time: 0.077387
+Invoking:
+  fasta-shuffle-letters meme_results/seqs-centered meme_results/seqs-shuffled -kmer 2 -tag -dinuc -dna -seed 1
+Finished invoke:
+  name: shuffle_seqs  status: 0  time: 0.008767
+Invoking:
+  fasta-get-markov -nostatus -nosummary -dna -m 1 meme_results/sortedpeaks.fa meme_results/background
+Finished invoke:
+  name: bg  status: 0  time: 0.008832
+Invoking:
+  meme meme_results/seqs-centered -oc meme_results/meme_out -mod zoops -nmotifs 3 -minw 6 -maxw 20 -bfile meme_results/background -dna -revcomp -nostatus
+Finished invoke:
+  name: meme  status: 0  time: 13.341575
+Invoking:
+  dreme -verbosity 1 -oc meme_results/dreme_out -png -dna -p meme_results/seqs-centered -n meme_results/seqs-shuffled
+Finished invoke:
+  name: dreme  status: 256  time: 0.076414
+Invoking:
+  centrimo -seqlen 566 -verbosity 1 -oc meme_results/centrimo_out -bfile meme_results/background meme_results/sortedpeaks.fa meme_results/meme_out/meme.xml JASPAR_CORE_2016.meme
+Finished invoke:
+  name: centrimo  status: 0  time: 1.17997
+Invoking:
+  tomtom -verbosity 1 -oc meme_results/meme_tomtom_out -min-overlap 5 -dist pearson -evalue -thresh 1 -no-ssc meme_results/meme_out/meme.xml JASPAR_CORE_2016.meme
+Finished invoke:
+  name: meme_tomtom  status: 0  time: 5.448511
+Invoking:
+  tomtom -verbosity 1 -text -thresh 0.1 meme_results/combined.meme meme_results/combined.meme 1> meme_results/motif_alignment.txt
+Finished invoke:
+  name: align  status: 0  time: 0.030422
+Invoking:
+  spamo -verbosity 1 -oc meme_results/spamo_out_1 -bgfile meme_results/background -keepprimary -primary ABRGYGCCMCCTRGTGGYVR meme_results/sortedpeaks.fa meme_results/meme_out/meme.xml meme_results/meme_out/meme.xml JASPAR_CORE_2016.meme
+Finished invoke:
+  name: spamo1  status: 0  time: 5.302276
+Invoking:
+  fimo --parse-genomic-coord --verbosity 1 --oc meme_results/fimo_out_1 --bgfile meme_results/background --motif ABRGYGCCMCCTRGTGGYVR meme_results/meme_out/meme.xml meme_results/sortedpeaks.fa
+Finished invoke:
+  name: fimo1  status: 0  time: 0.103705
+Writing output
+Invoking:
+  meme-chip_html_to_tsv meme_results/meme-chip.html meme_results/summary.tsv "meme-chip -meme-maxw 20 -o meme_results -db JASPAR_CORE_2016.meme sortedpeaks.fa" 5.0.5 "Mon Mar 18 20\:12\:19 2019 -0700"
+Finished invoke:
+  name: summary  status: 0  time: 0.127874
+Done
