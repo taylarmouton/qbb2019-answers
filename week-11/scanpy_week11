@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+#(week-11_scanpy_jupyter
+import scanpy as sc 
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+#Simply use `import scanpy as sc` and `import scanpy.external as sce` instead.
+# Read 10x dataset
+# adata = sc.read_10x_h5("neuron_10k_v3_filtered_feature_bc_matrix.h5")
+# # Make variable names (in this case the genes) unique
+# adata.var_names_make_unique()
+# sc.tl.pca(adata, n_comps=50, zero_center=True, svd_solver='auto', random_state=0, return_info=False, use_highly_variable=None, dtype='float32', copy=False, chunked=False, chunk_size=None)
+# scanpy.pl.pca(adata)
+#sc.pl.scatter(adata, x=None, y=None, color=None, use_raw=None, layers=None, sort_order=True, alpha=None, basis=None, groups=None, components=None, projection='2d', legend_loc='right margin', legend_fontsize=None, legend_fontweight=None, legend_fontoutline=None, color_map=None, palette=None, frameon=None, right_margin=None, left_margin=None, size=None, title=None, show=None, save=None, ax=None)
+#print(adata)
+
+
+#Read 10x dataset 
+adata = sc.read_10x_h5("neuron_10k_v3_filtered_feature_bc_matrix.h5")
+#Make variable names (in this case the genes) unique 
+adata.var_names_make_unique()
+#sc.tl.pca(adata, n_comps=50, zero_center=True, svd_solver='auto', random_state=0, return_info=False, use_highly_variable=None, dtype='float32', copy=False, chunked=False, chunk_size=None)
+
+#sc.pl.pca(adata)
+
+sc.pp.filter_genes(adata, min_counts = 1) #only consider genes with more than 1 count
+sc.pp.normalize_per_cell(adata, key_n_counts = 'n_counts_all') #normalize with total UMI count per cell
+
+filter_result = sc.pp.filter_genes_dispersion(adata.X, flavor = 'cell_ranger', n_top_genes=1000, log = False)
+
+adata = adata[:, filter_result.gene_subset] #filter genes
+sc.pp.normalize_per_cell(adata)  # need to redo normalization after filtering
+sc.pp.log1p(adata)
+sc.pp.scale(adata)
+sc.tl.pca(adata,n_comps=50)
+sc.pl.pca(adata)
+
+sc.pp.neighbors(adata, n_neighbors = 15)
+sc.tl.louvain(adata)
+sc.tl.umap(adata)
+sc.pl.umap(adata,color=['louvain'], palette=sns.color_palette("hls", 15), legend_fontsize="20")
+# sc.tl.tsne(adata)
+# sc.pl.tsne(adata,color=['louvain'], palette=sns.color_palette("hls", 15), legend_fontsize="20")

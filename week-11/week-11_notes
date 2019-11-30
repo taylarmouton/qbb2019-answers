@@ -1,0 +1,40 @@
+Beads w/ nucletodies on them to help you count-- barcoded gel beads
+flow in cells and proper enzymes
+oil droplet with either single cell attached or none generally-- sometimes can get multiple attached though (rare)
+What's on the bead?
+	Unique barcode that's the same for every oligo attached to it
+	UMI unique for each sequence/oligo
+	Poly-dT
+After getting emulsion
+	Carry out RT rxn in each droplet-- populations of cDNA
+	They're tagged with barcode and UMI so left (dsDNA)-- loose cells and beads throughout rxn
+	Tagged by sequence that comes after PolydT-- Read 2, 3' tagging 
+	Can't get isoform identification (comprehensive)
+Data Analysis
+	Align the read 2 sequence to genome/transcriptome to identify the gene corresponding to the molecule (STAR for 10X)
+	Tabulate by cell barcode and UMI-- UMI allow account for PCR duplication to collapse multiple reads (not two molecules)
+		barcode is 16 bp long and UMI 10 bp 
+		 Need to account for seq errors too
+		 want tolerant of seq errors  
+	Results in a count table 
+**Miss things that expressed @ LOW LEVELS**
+
+Qaulity control/filerting
+Normalization 
+dimension reduction-- for visualization (analysis not done here but could be for downstream clustering and it can remove noise)
+clustering: cells sim to ea other and diff from others (cell types) and then ANNOTATE 
+
+Dimension Reduction-- Machine Learning/Unsupervised Learning
+	Trying to take and project data into reduced dimension to reveal info about the structure of your input X
+	PCA needs linearization so can't be nonlinear 
+	Swissroll-- underlying structure but not linear so there's a plane that underlies this structure but it has no direction that PCA could unravel to find the 2D 
+		Need manifold learning to unravel--> project ot two dimensional space
+		t-SNE commonly used-- grouping things similar together but size means nothing and global orientation means nothing 
+			Stochastic 
+			Creating prob distribution on how any given point where likely to pick up nearest neighbor 
+			place points in lower dimension space that the chance of a choosing b as neighbor is preserved 
+			Have to tune to make sense of the data (trial and error)
+		UMAP: assumes
+			data uniformly dist
+			approx the underlying manifold and finds a lower dimensional representation that preserves distance within the manifold-- manifold strucuture and approx are what matter
+			
