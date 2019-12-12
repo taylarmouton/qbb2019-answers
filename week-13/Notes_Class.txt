@@ -1,0 +1,42 @@
+Cis reg modules interact with their target promoters through 3D structure
+	FISH used to help identify spacial organization but has caveats: low throughput, limited resolution, and limited number of unique channels for flurophore (spectrum of light)
+
+Sequencing methods to address this problem of spatially close: 3C based methods
+	Hi-C: tagging ends with biotin and then ligate--> pull down biotinylated ligated fragments
+		Get heat map as readout: set of interaction frquencies 
+		See the A and B compartment, which can verify with FISH
+	Fractal globule: blobs of things nearby so each chromosome resides in own compartment in the nucleus (occupy own unique space-- though the posisition varies from cell to cell)
+	
+TADs
+	The triangle heat maps-- can see the domains that self interact and have boundries that prevent erranous interactions
+	Definiding regulatory landscape 
+	
+Now with Hi-C
+	We can now see point point interactions (individual loops)
+	CTCF Defined loop boundry-- of TADs
+	Orientations specific-- pausing at that point, establishing the loop with cohesion complex 
+	
+Single Cell
+	Only have two copies of the chromosomes so limited number of interactions-- make 3D model to explain how they're put together (molec dynamic simulations)
+	Dealing w/ low coverage: constrains within 3D model vs actual coverage 
+		Not looking feature specific, but constraints to structure to model and understand 
+		
+HiChIP: Hi-C but using anitbody to pull down specific to your protein and seq that, looking at lanscape for that protein
+	Regulatory and structural 
+	
+Non Hi-C
+	GAM: take slice of nucleus, assume that things in that slice will be close together of far apart by chance--> seq these slices
+		How many times pair things looking at appear together/co-occur to see if there's a pattern--> looking at all the slices
+			1 cell
+			Many things co-occuring on a more local level-- cluster of things co-occuring: looking at hubs of interactions at diff place in genome
+	SPRITE: Unit of interaction hubs
+		 Digest genome--> cross link --> dilute and then spread out across 96 well plate (array) want one well/one interaction/plate (/ mean per here)
+		 Has oligo label that you append one creating custom barcode for each sample
+		 	Output gives sets of things interactions-- hubs not pairs 
+	TSA-Seq: POI labeled with peroxidase that creates free radicals that difuse out in space and create binding between biotin and the chromatin, predicatable difussion rate-- fancy proximity labeling
+
+Uses of these 
+	Genome assembly: Cleaning up messy signal 
+	Structural variation: abberant signal when things not where they're supposed to be and CNV
+	Regulatory Potiental: enhancer strength and interaction level with TSS crucial for how much gene transcribed (there's a vocab word for this but idk what)
+	

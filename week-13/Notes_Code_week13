@@ -1,0 +1,55 @@
+#Have to creat conda enviroment (in the week-13 directory)
+
+>conda create -n hifive -c bioconda -c anaconda -c conda-forge hifive
+>conda activate hifive
+
+#The Data We'll Work
+The chr10_frags.bed file is the set of HindIII sites (the restriction enzyme used in this experiment) for our chromosome of interest 
+
+The chr10_data.mat file is a set of half-fragment pairs and the corresponding number of reads that mapped between them 
+
+The file chr10_activity_binned.bed contains the combined signal of H3K27ac ChIP-seq and ATAC-seq at a set of regulatory elements identified a broad set of hematopoietic cells and summed over 5 Kb intervals 
+
+The file chr10_rna_binned.bed has the RNA-seq values (as log-transformed transcripts-per-million), summed over 5 Kb intervals. Both the activity and rna file values have been rescaled to between 0 and 1000 for visualization. All of the data is mapped against genome build mm10
+
+##Normalizing data
+#Making a Project: creating a file containing all of the valid interactions; This command is creating a project file and performing a filtering step that removes fragment-ends (fends) that have fewer than 3 interactions with out valid fends
+
+python -c "import hifive; hic=hifive.HiC('PROJECT_FNAME', 'w'); hic.load_data('DATA_FNAME'); hic.filter_fends(10); hic.save()"
+	Where PROJECT_FNAME: Chr10_HIFIVE
+		DATA_FNAME: Chr10_valid
+
+#Matrix-balancing approach to correcting the data: hic-normalize
+	hifive hic-normalize express -w cis -f 10 PROJECT_FNAME
+		Where PROJECT_FNAME: Chr10_HIFIVE
+
+##Heatmaps
+#Hifive hic-heatmap command which will produce a file binning all of the data at the specified resolution and, if the ‘-i’ argument is used, generate a corresponding image
+	hifive hic-heatmap -b 500000 -d raw -F npz -i IMAGENAME.png PROJECT_FNAME OUTPUT_FNAME.npz
+		Where IMAGENAME: Heatmap_Chr10HIFIVE 
+						 PROJECT_FNAME: Chr10_HIFIVE
+						 OUTPUT_FNAME.npz: Binned_heatmap_1
+
+#Producing a heatmap with all interactions at 0.5 Mb resolution: hifive hic-interval
+hifive hic-interval -c chr10 -s 5000000 -e 50000000 -b 50000 -d fend -M -i IMAGENAME.png PROJECT_FNAME OUTPUT_FNAME
+	Where IMAGENAME: 50kb_Heatmap 
+					 PROJECT_FNAME: Chr10_HIFIVE
+					 OUTPUT_FNAME: 50kb_binned_heatmap_2
+
+##Activity-by-Contact Expression Prediction
+#Load the data from the two bed files and filtering to interactions within region of interest
+	Where python starts LMAO (kill me)
+#Notes on finishing code 
+	Multiply column by activity for that bin-- taking value out of the dictionary 
+	Sum up
+	get predicted value 
+	expression values from RNA-Seq dictionary/index 
+	predicted values in same order as expression values
+data_subset = data[keys for expression, :][:, keys for RNA-seq]
+# intersecting two dictionaries 
+final_dict = {x:act_values[x] for x in act_values  
+                              if x in rna_values} 
+							  
+act_rna.keys
+columns from rnadict alone
+call value from dictionary: name of dictionary_[key]
